@@ -27,6 +27,10 @@ def get_db():
 app = FastAPI()
 
 
+@app.get("/blog-list")
+async def get_blog_list():
+    return {'Lista de blogs'}
+    
 @app.post("/blog")
 async def create(request: schemas.Blog, db: Session = Depends(get_db)):
     new_blog = models.Blog(title=request.title, body=request.body)
