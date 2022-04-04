@@ -1,8 +1,7 @@
-from turtle import home
 from typing import Optional
 from fastapi import FastAPI
 from enum import Enum
-import uvicorn
+
 from models import Blog
 
 
