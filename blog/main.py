@@ -39,8 +39,8 @@ async def blog_detail(blog_id, response:  Response, db: Session = Depends(get_db
 
 
 @app.post("/blog_create", status_code=status.HTTP_201_CREATED, tags=['blogs'])
-async def create(request: schemas.Blog, db: Session = Depends(get_db)):
-    new_blog = models.Blog(title=request.title, body=request.body)
+async def create(request: schemas.Blog, db: Session = Depends(get_db), ):
+    new_blog = models.Blog(title=request.title, body=request.body, creator_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -67,7 +67,7 @@ async def blog_delete(blog_id, db: Session = Depends(get_db)):
     return 'Done'
 
 
-@app.post('user/user_create', tags=['users'])
+@app.post('/user/user_create', tags=['users'])
 async def Create_user(request: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(name=request.name, email=request.email, password=Hash.bcrypt(request.password))
     db.add(new_user)
